@@ -304,12 +304,12 @@ int zgt_tx::set_lock(long tid1, long sgno1, long obno1, int count, char lockmode
   //if successful  return(0); else -1
   
   // write your code
-  zgt_hlink *ep = ZGT_Ht->find(sgno1,obno1); //search if object is present in hashtable
+  zgt_hlink *obj_ptr = ZGT_Ht->find(sgno1,obno1); //search if object is present in hashtable
   zgt_hlink *temp_tx, *temp;
 
   zgt_tx *tx = get_tx(tid1);
 
-  if(ep==NULL)
+  if(obj_ptr==NULL)
   {
     ZGT_Ht->add(tx, sgno1, obno1, lockmode1);// OBJECT FOUND: add to hashtable .
     perform_readWrite(tid1, obno1, lockmode1);
@@ -321,7 +321,7 @@ int zgt_tx::set_lock(long tid1, long sgno1, long obno1, int count, char lockmode
 	  temp = ZGT_Ht->findt(this->tid, sgno1, obno1);
 	  if(temp == NULL)
 	  {
-      temp_tx = this->others_lock(ep, sgno1, obno1);
+      temp_tx = this->others_lock(obj_ptr, sgno1, obno1);
       if(temp_tx != NULL)
       {
         tx->status = TR_WAIT;
@@ -337,7 +337,7 @@ int zgt_tx::set_lock(long tid1, long sgno1, long obno1, int count, char lockmode
       else return 0;
   }
     status = TR_ACTIVE;
-	  ep->lockmode = lockmode1;
+	  obj_ptr->lockmode = lockmode1;
 	  this->perform_readWrite(tid, obno1, lockmode1);
 	  zgt_v(0);
   
