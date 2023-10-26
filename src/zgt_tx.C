@@ -303,87 +303,45 @@ int zgt_tx::set_lock(long tid1, long sgno1, long obno1, int count, char lockmode
   //transaction list if waiting.
   //if successful  return(0); else -1
   
-  // //write your code
-  zgt_hlink *obj_ptr = ZGT_Ht->find(sgno1,obno1); //search if object is present in hashtable
- 
-  bool lock = false;
+  // write your code
+  zgt_hlink *ep = ZGT_Ht->find(sgno1,obno1); //search if object is present in hashtable
+  zgt_hlink *temp_tx, *temp;
 
-  while(!lock){
-    zgt_p(0);
-    zgt_tx *currentTx = get_tx(tid1);
+  zgt_tx *tx = get_tx(tid1);
 
-    if(obj_ptr == NULL){
-      //Object is not present in the Hash table
-      ZGT_Ht->add(currentTx, currentTx->sgno, obno1, currentTx->lockmode);
-
-      currentTx->status = 'P';
-      zgt_v(0);       // Release tx manager
-      return(1);
-
-    }else{
-  //Current transaction already has the lock and is trying to access the object
-    if(obj_ptr->tid == tid1){
-      currentTx->status = 'P';
-      zgt_v(0);
-      return(1);
-    }else{
-      zgt_tx *secondaryTx = get_tx(obj_ptr->tid);  //Txn holding the object
-      zgt_hlink *otherTx = others_lock(obj_ptr, sgno1, obno1);  //Other txns wanting the object.
-
-      if(currentTx->Txtype=='R' && secondaryTx->Txtype=='R' && otherTx->lockmode!='X'){
-      //Check if current txn and txn holding object have shared read.
-      //Also check if any other txn is waiting on the object for a write. This takes care that txn doesnt unfairly wait.
-        lock = true;  //Lock granted
-
-        if(currentTx->head == NULL){
-          //Add current transaction to object in hash table, as it has no pointers to hash table
-            ZGT_Ht->add(currentTx, currentTx->sgno, obno1, currentTx->lockmode);
-            obj_ptr=ZGT_Ht->find(currentTx-> sgno, obno1);
-            //printf("In here new obj head\n");
-            currentTx->head = obj_ptr;            //Point the head to this object node
-            currentTx->status = 'P';
-            //currentTx->semno = -1;
-            zgt_v(0);
-            return(1);
-        }else{
-          //iterate to the end of object list to add new required object node at the end
-          zgt_hlink *temp = currentTx->head;
-          while(temp->nextp != NULL){
-            temp = temp->nextp;
-          }
-          temp->nextp = obj_ptr;               // Point the nextp of last object node to the new node
-
-          currentTx->status = 'P';
-          //currentTx->semno = -1;
-          zgt_v(0);
-          return(1);
-        }
+  if(ep==NULL)
+  {
+    ZGT_Ht->add(tx, sgno1, obno1, lockmode1);// OBJECT FOUND: add to hashtable .
+    perform_readWrite(tid1, obno1, lockmode1);
+    zgt_v(0);
+    return 0;
+  }
+  else 
+  {
+	  temp = ZGT_Ht->findt(this->tid, sgno1, obno1);
+	  if(temp == NULL)
+	  {
+      temp_tx = this->others_lock(ep, sgno1, obno1);
+      if(temp_tx != NULL)
+      {
+        tx->status = TR_WAIT;
+        tx->lockmode = lockmode1;
+        tx->obno = obno1;
+        tx->setTx_semno(temp_tx->tid, temp_tx->tid);
+        zgt_v(0);
+        zgt_p(temp_tx->tid);
+        tx->status = TR_ACTIVE;
+        zgt_p(0);
+        set_lock(tx->tid, tx->sgno, tx->obno, count, tx->lockmode);
       }
-      else{
-          //If one of the transaction is not in shared mode
-            currentTx->status = 'W';         //Make status of current txn as WAIT
-            currentTx->obno = obno1;
-            currentTx->lockmode = lockmode1;
-            if(get_tx(obj_ptr->tid))
-            currentTx->setTx_semno(obj_ptr->tid, obj_ptr->tid); //Set semaphore on current tx
-                                                              //so that txn holding object knows a new txn is waiting for the object.
-            else{
-            //In case txn holding object ceases, grant lock.
-              currentTx->status = 'P';
-              zgt_v(0);
-              return(1);
-
-            }
-
-            printf("Tx %ld is waiting on:T%ld\n", currentTx->tid, obj_ptr->tid);
-            currentTx->print_tm();
-            zgt_v(0);
-            zgt_p(obj_ptr->tid); //Hold txn with the object.
-            lock = false;
-          }
-        }// different thread hold Object
-      }//object does exist
-    }
+      else return 0;
+  }
+    status = TR_ACTIVE;
+	  ep->lockmode = lockmode1;
+	  this->perform_readWrite(tid, obno1, lockmode1);
+	  zgt_v(0);
+  
+  }
 
   return(0);
 }

@@ -100,7 +100,15 @@ TxType : R
 creating BeginTx thread for Tx: 3
 
 finished creating BeginTx thread for Tx: 3
-read 3 2
+printing the tx  list 
+read 3 2Tid	TxType	Thrid		objno	lock	status	semno
+2	W	140349905594112	2	S	W	-1
+1	W	140349930772224	-1	 	E	1
+
+:::Hash node with Tid:1, obno:6 lockmode:S removed
+
+:::Hash node with Tid:1, obno:2 lockmode:X removed
+
 Read : 3 : 2
 
 
@@ -112,6 +120,8 @@ Write : 3 : 1
 
 
 entering TxWrite
+
+:::Hash node with Tid:1, obno:1 lockmode:S removed
 
 leaving TxWrite
 read 3 2
@@ -129,3 +139,6 @@ Entering End of schedule thread with thrNum: 14
 Wait for threads and cleanup
 Thread 0 completed with ret value: 0
 Thread 1 completed with ret value: 0
+Thread 2 completed with ret value: 0
+Thread 3 completed with ret value: 0
+Thread 4 completed with ret value: 0
