@@ -1,0 +1,268 @@
+
+Initializing the TM
+
+leaving TM initialization
+// Multiple RW Txs test case with no deadlock
+// Multiple RW Txs test case with no deadlock
+log RW_disjoint.log
+Log file name:RW_disjoint.log
+
+entering openlog
+
+Given log file name: RW_disjoint.log
+leaving openlog
+// op	Tx#	type
+// op	Tx#	type
+// op	Tx#	Obj
+// op	Tx#	Obj
+BeginTx 1 W
+BeginTx : 1
+
+TxType : W
+
+
+creating BeginTx thread for Tx: 1
+
+finished creating BeginTx thread for Tx: 1
+Read 1 1
+Read : 1 : 1
+
+
+creating TxRead thread for Tx: 1
+
+exiting TxRead thread create for Tx: 1
+Write 1 2
+Write : 1 : 2
+
+
+entering TxWrite
+
+leaving TxWrite
+Read 1 3
+Read : 1 : 3
+
+
+creating TxRead thread for Tx: 1
+
+exiting TxRead thread create for Tx: 1
+BeginTx 2 W
+BeginTx : 2
+
+TxType : W
+
+
+creating BeginTx thread for Tx: 2
+
+finished creating BeginTx thread for Tx: 2
+Write 2 4
+Write : 2 : 4
+
+
+entering TxWrite
+
+leaving TxWrite
+Write 2 5
+Write : 2 : 5
+
+
+entering TxWrite
+
+leaving TxWrite
+BeginTx 3 W
+BeginTx : 3
+
+TxType : W
+
+
+creating BeginTx thread for Tx: 3
+
+finished creating BeginTx thread for Tx: 3
+Write 3 6
+Write : 3 : 6
+
+
+entering TxWrite
+
+leaving TxWrite
+Write 3 7
+Write : 3 : 7
+
+
+entering TxWrite
+
+leaving TxWrite
+read 3 8
+Read : 3 : 8
+
+
+creating TxRead thread for Tx: 3
+
+exiting TxRead thread create for Tx: 3
+Commit 3
+Commit : 3
+
+
+entering TxCommit
+
+leaving TxCommit
+commit 2
+Commit : 3
+
+
+entering TxCommit
+
+leaving TxCommit
+Commit 1
+Commit : 2
+
+
+entering TxCommit
+
+leaving TxCommit
+begintx 5 R
+BeginTx : 5
+
+TxType : R
+
+
+creating BeginTx thread for Tx: 5
+printing the tx  list 
+Tid	TxType	Thrid		objno	lock	status	semno
+printing the tx  list 
+Tid	TxType	Thrid		objno	lock	status	semno
+3	W	140375595394816	-1	 	E	-1
+3	W	140375595394816	-1	 	E	-1
+2	W	140375620572928	-1	 	P	-1
+1	W	140375723661056	-1	 	E	-1
+
+:::Hash node with Tid:3, obno:8 lockmode:S removed
+
+finished creating BeginTx thread for Tx: 5
+printing the tx  list 
+Tid	TxType	Thrid		objno	lock	status	semno
+2	W	140375620572928	-1	 	P	-1
+5	R	140375461177088	-1	 	P	-1
+3	W	140375595394816	-1	 	E	-1
+2	W	140375620572928	-1	 	E	-1
+read 5 91	W	140375723661056	-1	 	E	-1
+
+
+:::Hash node with Tid:3, obno:7 lockmode:X removed
+1	W	140375723661056	-1	 	E	-1
+
+:::Hash node with Tid:1, obno:3 lockmode:S removed
+
+:::Hash node with Tid:1, obno:2 lockmode:X removed
+
+:::Hash node with Tid:1, obno:1 lockmode:S removed
+
+check_semno is -1
+
+:::Hash node with Tid:3, obno:6 lockmode:X removed
+
+check_semno is -1
+
+:::Hash node with Tid:2, obno:5 lockmode:X removed
+
+:::Hash node with Tid:2, obno:4 lockmode:X removed
+
+check_semno is -1
+Read : 5 : 9
+
+
+creating TxRead thread for Tx: 5
+
+exiting TxRead thread create for Tx: 5
+read 5 10
+Read : 5 : 10
+
+
+creating TxRead thread for Tx: 5
+
+exiting TxRead thread create for Tx: 5
+read 5 11
+Read : 5 : 11
+
+
+creating TxRead thread for Tx: 5
+
+exiting TxRead thread create for Tx: 5
+read 5 12
+Read : 5 : 12
+
+
+creating TxRead thread for Tx: 5
+
+exiting TxRead thread create for Tx: 5
+read 5 13
+Read : 5 : 13
+
+
+creating TxRead thread for Tx: 5
+
+exiting TxRead thread create for Tx: 5
+read 5 1
+Read : 5 : 1
+
+
+creating TxRead thread for Tx: 5
+
+exiting TxRead thread create for Tx: 5
+commit 5
+Commit : 5
+
+
+entering TxCommit
+
+leaving TxCommit
+end all
+Release all resources and exit:
+
+
+Entering End of schedule thread with thrNum: 22
+Wait for threads and cleanup
+Thread 0 completed with ret value: 0
+Thread 1 completed with ret value: 0
+Thread 2 completed with ret value: 0
+Thread 3 completed with ret value: 0
+printing the tx  list 
+Tid	TxType	Thrid		objno	lock	status	semno
+5	R	140375461177088	-1	 	E	-1
+
+:::Hash node with Tid:5, obno:1 lockmode:S removed
+
+:::Hash node with Tid:5, obno:13 lockmode:S removed
+Thread 4 completed with ret value: 0
+
+:::Hash node with Tid:5, obno:12 lockmode:S removed
+
+:::Hash node with Tid:5, obno:11 lockmode:S removed
+
+:::Hash node with Tid:5, obno:10 lockmode:S removed
+
+:::Hash node with Tid:5, obno:9 lockmode:S removed
+
+check_semno is -1
+Thread 5 completed with ret value: 0
+Thread 6 completed with ret value: 0
+Thread 7 completed with ret value: 0
+Thread 8 completed with ret value: 0
+Thread 9 completed with ret value: 0
+Thread 10 completed with ret value: 0
+Thread 11 completed with ret value: 0
+Thread 12 completed with ret value: 0
+Thread 13 completed with ret value: 0
+Thread 14 completed with ret value: 0
+Thread 15 completed with ret value: 0
+Thread 16 completed with ret value: 0
+Thread 17 completed with ret value: 0
+Thread 18 completed with ret value: 0
+Thread 19 completed with ret value: 0
+Thread 20 completed with ret value: 0
+Thread 21 completed with ret value: 0
+ALL threads finished their work
+Releasing mutexes and condpool
+Relasing all semaphores
+endTm completed
+
+Finished end of schedule thread: endTm

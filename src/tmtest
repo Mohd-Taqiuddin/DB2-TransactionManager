@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Check the number of command-line arguments
+if [ $# -ne 2 ]; then
+  echo "Usage: $0 loopcount filename (without extension)"
+  exit 1
+fi
+
+loop=$1
+infile=$2
+rm -f "$infile.out"
+rm -f "$infile.log"
+# Added to remove log file in the source directory
+rm -f "./$infile.log"
+count=0
+
+while [ "$count" -lt "$loop" ]; do
+  echo "EXECUTION: $count"
+  echo "Execution:" >> "$infile.out"
+  echo "$count" >> "$infile.out"
+  # Execute zgt_test with the input file and redirect output to the output file
+  ./zgt_test "$infile.txt" > "$infile.out"
+  ((count++))
+done
+
+./ipcs_cleanup.sh

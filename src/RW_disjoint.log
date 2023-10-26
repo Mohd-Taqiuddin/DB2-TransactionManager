@@ -1,0 +1,14 @@
+---------------------------------------------------------------------------
+TxId	Txtype	Operation	ObId:Obvalue:optime	LockType	Status		TxStatus
+T1	W 	BeginTx
+T2	W 	BeginTx
+T3	W 	BeginTx
+T5	R 	BeginTx
+8 : 0, 7 : 0, 6 : 0, 
+T3	  	CommitTx 	 
+5 : 0, 3 : 0, 4 : 0, 
+T2	  	CommitTx 	 
+2 : 0, 1 : 0, 
+T1	  	CommitTx 	 
+1 : 0, 13 : 0, 12 : 0, 11 : 0, 10 : 0, 9 : 0, 
+T5	  	CommitTx 	 
