@@ -93,6 +93,13 @@ Commit : 1
 
 entering TxCommit
 printing the tx  list 
+Tid	TxType	Thrid		objno	lock	status	semno
+2	W	140266719672064	3	X	W	-1
+1	W	140266811447040	-1	 	E	1
+
+:::Hash node with Tid:1, obno:2 lockmode:X removed
+
+:::Hash node with Tid:1, obno:3 lockmode:X removed
 
 leaving TxCommit
 end all
@@ -105,28 +112,21 @@ Thread 0 completed with ret value: 0
 Thread 1 completed with ret value: 0
 Thread 2 completed with ret value: 0
 Thread 3 completed with ret value: 0
-Tid	TxType	Thrid		objno	lock	status	semno
-2	W	140378233636608	3	X	W	-1
-1	W	140378250422016	-1	 	E	1
-
-:::Hash node with Tid:1, obno:2 lockmode:X removed
-
-:::Hash node with Tid:1, obno:3 lockmode:X removed
 Thread 4 completed with ret value: 0
 printing the tx  list 
 Tid	TxType	Thrid		objno	lock	status	semno
-2	W	140378233636608	3	X	E	-1
-
-:::Hash node with Tid:2, obno:2 lockmode:X removed
-
-:::Hash node with Tid:2, obno:3 lockmode:X removed
+2	W	140266719672064	3	X	E	-1
 Thread 5 completed with ret value: 0
 Thread 6 completed with ret value: 0
+
+:::Hash node with Tid:2, obno:2 lockmode:X removed
+Thread 7 completed with ret value: 0
+
+:::Hash node with Tid:2, obno:3 lockmode:X removed
 
 :::Hash node with Tid:2, obno:1 lockmode:S removed
 
 check_semno is -1
-Thread 7 completed with ret value: 0
 Thread 8 completed with ret value: 0
 Thread 9 completed with ret value: 0
 Thread 10 completed with ret value: 0

@@ -117,13 +117,6 @@ Commit : 3
 
 
 entering TxCommit
-printing the tx  list 
-Tid	TxType	Thrid		objno	lock	status	semno
-3	W	140011370444544	-1	 	E	-1
-2	W	140011457173248	-1	 	P	-1
-1	W	140011499136768	-1	 	P	-1
-
-:::Hash node with Tid:3, obno:9 lockmode:S removed
 
 leaving TxCommit
 Commit 1
@@ -131,12 +124,6 @@ Commit : 2
 
 
 entering TxCommit
-
-:::Hash node with Tid:3, obno:7 lockmode:X removed
-
-:::Hash node with Tid:3, obno:6 lockmode:X removed
-
-check_semno is -1
 
 leaving TxCommit
 begintx 5 R
@@ -148,32 +135,54 @@ TxType : R
 creating BeginTx thread for Tx: 5
 printing the tx  list 
 Tid	TxType	Thrid		objno	lock	status	semno
+3	W	140330053654272	-1	 	E	-1
+2	W	140330148095744	-1	 	E	-1
+1	W	140330190059264	-1	 	E	-1
+
+:::Hash node with Tid:3, obno:9 lockmode:S removed
+
+:::Hash node with Tid:3, obno:7 lockmode:X removed
+
+:::Hash node with Tid:3, obno:6 lockmode:X removed
+
+check_semno is -1
+printing the tx  list 
+Tid	TxType	Thrid		objno	lock	status	semno
+2	W	140330148095744	-1	 	E	-1
+1	W	140330190059264	-1	 	E	-1
+
+:::Hash node with Tid:2, obno:5 lockmode:X removed
+
+:::Hash node with Tid:2, obno:4 lockmode:X removed
+printing the tx  list 
 
 finished creating BeginTx thread for Tx: 5
+
+check_semno is -1
+Tid	TxType	Thrid		objno	lock	status	semno
+1	W	140330190059264	-1	 	E	-1
+
+:::Hash node with Tid:1, obno:8 lockmode:X removed
 read 5 1
 Read : 5 : 1
 
 
 creating TxRead thread for Tx: 5
-printing the tx  list 
-Tid	TxType	Thrid		objno	lock	status	semno
 
 exiting TxRead thread create for Tx: 5
-2	W	140011457173248	-1	 	E	-1
-1	W	140011499136768	-1	 	E	-1
 read 5 2
-Read : 5 : 2
-
-
-creating TxRead thread for Tx: 5
-
-:::Hash node with Tid:1, obno:8 lockmode:X removed
 
 :::Hash node with Tid:1, obno:3 lockmode:S removed
 
 :::Hash node with Tid:1, obno:2 lockmode:X removed
+Read : 5 : 2
+
 
 :::Hash node with Tid:1, obno:1 lockmode:S removed
+
+check_semno is -1
+
+creating TxRead thread for Tx: 5
 
 exiting TxRead thread create for Tx: 5
 read 5 3
@@ -181,13 +190,6 @@ Read : 5 : 3
 
 
 creating TxRead thread for Tx: 5
-2	W	140011457173248	-1	 	E	-1
-
-:::Hash node with Tid:2, obno:5 lockmode:X removed
-
-:::Hash node with Tid:2, obno:4 lockmode:X removed
-
-check_semno is -1
 
 exiting TxRead thread create for Tx: 5
 read 5 8
@@ -228,7 +230,24 @@ Thread 0 completed with ret value: 0
 Thread 1 completed with ret value: 0
 Thread 2 completed with ret value: 0
 Thread 3 completed with ret value: 0
+printing the tx  list 
+Tid	TxType	Thrid		objno	lock	status	semno
+5	R	140329919436544	-1	 	E	-1
+
+:::Hash node with Tid:5, obno:7 lockmode:S removed
+
+:::Hash node with Tid:5, obno:6 lockmode:S removed
 Thread 4 completed with ret value: 0
+
+:::Hash node with Tid:5, obno:8 lockmode:S removed
+
+:::Hash node with Tid:5, obno:3 lockmode:S removed
+
+:::Hash node with Tid:5, obno:2 lockmode:S removed
+
+:::Hash node with Tid:5, obno:1 lockmode:S removed
+
+check_semno is -1
 Thread 5 completed with ret value: 0
 Thread 6 completed with ret value: 0
 Thread 7 completed with ret value: 0
@@ -241,28 +260,11 @@ Thread 13 completed with ret value: 0
 Thread 14 completed with ret value: 0
 Thread 15 completed with ret value: 0
 Thread 16 completed with ret value: 0
-printing the tx  list 
-Tid	TxType	Thrid		objno	lock	status	semno
-5	R	140011227834112	1	S	E	-1
-
-:::Hash node with Tid:5, obno:7 lockmode:S removed
-
-:::Hash node with Tid:5, obno:6 lockmode:S removed
-
-:::Hash node with Tid:5, obno:8 lockmode:S removed
-
-:::Hash node with Tid:5, obno:3 lockmode:S removed
 Thread 17 completed with ret value: 0
 Thread 18 completed with ret value: 0
 Thread 19 completed with ret value: 0
 Thread 20 completed with ret value: 0
 Thread 21 completed with ret value: 0
-
-:::Hash node with Tid:5, obno:2 lockmode:S removed
-
-:::Hash node with Tid:5, obno:1 lockmode:S removed
-
-check_semno is -1
 Thread 22 completed with ret value: 0
 ALL threads finished their work
 Releasing mutexes and condpool

@@ -154,16 +154,16 @@ Thread 2 completed with ret value: 0
 Thread 3 completed with ret value: 0
 printing the tx  list 
 Tid	TxType	Thrid		objno	lock	status	semno
-3	R	139781782628096	1	S	W	-1
-2	R	139781889738496	1	S	W	-1
-1	R	139781923309312	-1	 	E	1
+2	R	140004097509120	-1	 	P	-1
+3	R	140003988469504	1	S	W	-1
+1	R	140004209346304	-1	 	E	1
 
 :::Hash node with Tid:1, obno:8 lockmode:S removed
+Thread 4 completed with ret value: 0
 
 :::Hash node with Tid:1, obno:3 lockmode:S removed
 
 :::Hash node with Tid:1, obno:2 lockmode:S removed
-Thread 4 completed with ret value: 0
 
 :::Hash node with Tid:1, obno:1 lockmode:S removed
 Thread 5 completed with ret value: 0
@@ -171,8 +171,8 @@ Thread 6 completed with ret value: 0
 Thread 7 completed with ret value: 0
 printing the tx  list 
 Tid	TxType	Thrid		objno	lock	status	semno
-3	R	139781782628096	1	S	W	-1
-2	R	139781889738496	1	S	E	2
+2	R	140004097509120	-1	 	E	2
+3	R	140003988469504	1	S	W	-1
 
 :::Hash node with Tid:2, obno:5 lockmode:S removed
 
@@ -183,14 +183,13 @@ Thread 8 completed with ret value: 0
 Thread 9 completed with ret value: 0
 Thread 10 completed with ret value: 0
 Thread 11 completed with ret value: 0
+Thread 12 completed with ret value: 0
 printing the tx  list 
 Tid	TxType	Thrid		objno	lock	status	semno
-3	R	139781782628096	1	S	E	-1
-Thread 12 completed with ret value: 0
-Thread 13 completed with ret value: 0
-Thread 14 completed with ret value: 0
+3	R	140003988469504	1	S	E	-1
 
 :::Hash node with Tid:3, obno:7 lockmode:S removed
+Thread 13 completed with ret value: 0
 
 :::Hash node with Tid:3, obno:3 lockmode:S removed
 
@@ -199,6 +198,7 @@ Thread 14 completed with ret value: 0
 :::Hash node with Tid:3, obno:1 lockmode:S removed
 
 check_semno is -1
+Thread 14 completed with ret value: 0
 Thread 15 completed with ret value: 0
 Thread 16 completed with ret value: 0
 ALL threads finished their work
